@@ -37,7 +37,6 @@ namespace Google_Suggest_Scraper
 
         }
 
-        // add comment
         HelperClass HelpMeClass = new HelperClass();
 
 
