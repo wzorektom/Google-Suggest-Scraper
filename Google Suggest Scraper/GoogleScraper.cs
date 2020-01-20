@@ -19,6 +19,8 @@ namespace Google_Suggest_Scraper
         {
             InitializeComponent();
                
+
+            // Default all controlls
             lblCountGrid1.Text = "0";
             lblCountGrid2.Text = "0";
             lblCountGrid3.Text = "0";
@@ -38,19 +40,22 @@ namespace Google_Suggest_Scraper
         }
 
         /// <summary>
-        /// Add some comments
+        /// Initiate HelperClass
         /// </summary>
-        HelperClass HelpMeClass = new HelperClass();
+        readonly HelperClass HelpMeClass = new HelperClass();
 
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            // Get the search string
             HelpMeClass.SearchString = txtSearchQuery.Text;
 
+            // Reset controls
             lblCountGrid1.Text = "0";
             lblCountGrid2.Text = "0";
             lblCountGrid3.Text = "0";
 
+            // Clear DataGrid datasource
             dataGridView1.DataSource = null;
             dataGridView2.DataSource = null;
             dataGridView3.DataSource = null;
@@ -70,12 +75,15 @@ namespace Google_Suggest_Scraper
                 //InitializeTimer();
                 timer3.Start();
 
-
+                // Run the query
                 GetAlphabet();
                 GetQuestions();
                 GetQuestionsAlphabet();
 
+                // Disable the search button while the search is in progress
                 btnSearch.Enabled = false;
+
+                // Disable the Excel export button while the search is in progress
                 btnExcellExport.Enabled = false;
             }
 
@@ -89,8 +97,8 @@ namespace Google_Suggest_Scraper
 
         private async void GetAlphabet()
         {
-            SearchAlphabetSoup GetGoogleSearches = new SearchAlphabetSoup();
-            var task = GetGoogleSearches.GetDataAsync(txtSearchQuery.Text);
+            // Run the AlphabetSoup
+            var task = new SearchAlphabetSoup().GetDataAsync(txtSearchQuery.Text);
 
             try
             {
@@ -117,8 +125,7 @@ namespace Google_Suggest_Scraper
 
         private async void GetQuestions()
         {
-            SearchQuestions GetGoogleSearchQuestiona = new SearchQuestions();
-            var task = GetGoogleSearchQuestiona.GetDataAsync(txtSearchQuery.Text);
+            var task = new SearchQuestions().GetDataAsync(txtSearchQuery.Text);
 
             try
             {
@@ -146,8 +153,7 @@ namespace Google_Suggest_Scraper
 
         private async void GetQuestionsAlphabet()
         {
-            SearchQuestionsAlphabet GetGoogleSearchQuestionaAlphabet = new SearchQuestionsAlphabet();
-            var task = GetGoogleSearchQuestionaAlphabet.GetDataAsync(txtSearchQuery.Text);
+            var task = new SearchQuestionsAlphabet().GetDataAsync(txtSearchQuery.Text);
 
             try
             {
