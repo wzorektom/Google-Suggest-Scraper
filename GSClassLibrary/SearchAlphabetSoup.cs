@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -10,12 +9,14 @@ namespace ClassLibrary
 {
     public class SearchAlphabetSoup : GoogleSearchAPI
     {
-        
-        List<GoogleAlphabetSoup> Google_Soup = new List<GoogleAlphabetSoup>();
+        private static readonly List<GoogleAlphabetSoup> list = new List<GoogleAlphabetSoup>();
+        readonly List<GoogleAlphabetSoup> Google_Soup = list;
 
-
-
-
+        /// <summary>
+        /// Search 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public async Task<List<GoogleAlphabetSoup>> GetDataAsync(string query)
         {
             Google_Soup.Clear();
@@ -24,7 +25,7 @@ namespace ClassLibrary
             using (HttpClient client = new HttpClient())
             {
 
-                result = await client.GetStringAsync(searchString + query + " ");
+                result = await client.GetStringAsync(QueryPath + query + " ");
                 XDocument doc1 = XDocument.Parse(result);
 
                 var suggestionsNoAlphabet = from suggestion in doc1.Descendants("CompleteSuggestion")
@@ -37,7 +38,7 @@ namespace ClassLibrary
 
                 for (char c = 'a'; c <= 'z'; c++)
                 {
-                    result = await client.GetStringAsync(searchString + query + " " + c);
+                    result = await client.GetStringAsync(QueryPath + query + " " + c);
                     XDocument doc = XDocument.Parse(result);
 
                     var suggestionsAlphabet = from suggestion in doc.Descendants("CompleteSuggestion")

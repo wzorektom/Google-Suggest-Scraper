@@ -1,15 +1,11 @@
 ﻿using ClassLibrary;
 using Microsoft.Office.Interop.Excel;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Google_Suggest_Scraper
 {
@@ -60,7 +56,8 @@ namespace Google_Suggest_Scraper
             dataGridView2.DataSource = null;
             dataGridView3.DataSource = null;
 
-            
+
+            // Let the user know to type the search query first before pressing search button
             if (txtSearchQuery.Text == "")
             {
                 MessageBox.Show("Please type the search phrase!", "Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
@@ -94,10 +91,12 @@ namespace Google_Suggest_Scraper
 
 
 
-
+        /// <summary>
+        /// Run the Alphabet search
+        /// </summary>
         private async void GetAlphabet()
         {
-            // Run the AlphabetSoup
+            // Initiate Alphabet search
             var task = new SearchAlphabetSoup().GetDataAsync(txtSearchQuery.Text);
 
             try
@@ -262,7 +261,7 @@ namespace Google_Suggest_Scraper
             if (dataGridView1.SelectedCells.Count > 0)
             {
                 string selectedValue = dataGridView1.SelectedCells[0].Value.ToString();
-                System.Diagnostics.Process.Start("http://www.google.com/search?q=" + selectedValue);
+                Process.Start("http://www.google.com/search?q=" + selectedValue);
             }
         }
 
@@ -271,7 +270,7 @@ namespace Google_Suggest_Scraper
             if (dataGridView2.SelectedCells.Count > 0)
             {
                 string selectedValue = dataGridView2.SelectedCells[0].Value.ToString();
-                System.Diagnostics.Process.Start("http://www.google.com/search?q=" + selectedValue);
+                Process.Start("http://www.google.com/search?q=" + selectedValue);
             }
         }
 
@@ -280,7 +279,7 @@ namespace Google_Suggest_Scraper
             if (dataGridView3.SelectedCells.Count > 0)
             {
                 string selectedValue = dataGridView3.SelectedCells[0].Value.ToString();
-                System.Diagnostics.Process.Start("http://www.google.com/search?q=" + selectedValue);
+                Process.Start("http://www.google.com/search?q=" + selectedValue);
             }
         }
 

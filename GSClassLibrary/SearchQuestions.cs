@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -10,8 +9,14 @@ namespace ClassLibrary
 {
     public class SearchQuestions : GoogleSearchAPI
     {
-        List<GoogleQuestions> Google_Questions = new List<GoogleQuestions>();
+        private static readonly List<GoogleQuestions> list = new List<GoogleQuestions>();
+        readonly List<GoogleQuestions> Google_Questions = list;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public async Task<List<GoogleQuestions>> GetDataAsync(string query)
         {
             string result1 = String.Empty;      
@@ -23,7 +28,7 @@ namespace ClassLibrary
 
                 foreach (var question in questions)
                 {
-                    result1 = await client.GetStringAsync(searchString + question + " " + query + " ");
+                    result1 = await client.GetStringAsync(QueryPath + question + " " + query + " ");
 
                     XDocument doc = XDocument.Parse(result1);
 
