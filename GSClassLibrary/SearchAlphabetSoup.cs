@@ -13,9 +13,9 @@ namespace ClassLibrary
         readonly List<GoogleAlphabetSoup> Google_Soup = list;
 
         /// <summary>
-        /// Search 
+        /// Itterate through each letter of the alphabet with the given search query
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="query">The search word typed by the user</param>
         /// <returns></returns>
         public async Task<List<GoogleAlphabetSoup>> GetDataAsync(string query)
         {
