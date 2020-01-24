@@ -261,7 +261,7 @@ namespace Google_Suggest_Scraper
             if (dataGridView1.SelectedCells.Count > 0)
             {
                 string selectedValue = dataGridView1.SelectedCells[0].Value.ToString();
-                Process.Start("http://www.google.com/search?q=" + selectedValue);
+                Process.Start($"http://www.google.com/search?q={selectedValue}");
             }
         }
 
@@ -270,7 +270,7 @@ namespace Google_Suggest_Scraper
             if (dataGridView2.SelectedCells.Count > 0)
             {
                 string selectedValue = dataGridView2.SelectedCells[0].Value.ToString();
-                Process.Start("http://www.google.com/search?q=" + selectedValue);
+                Process.Start($"http://www.google.com/search?q={selectedValue}");
             }
         }
 
@@ -279,7 +279,7 @@ namespace Google_Suggest_Scraper
             if (dataGridView3.SelectedCells.Count > 0)
             {
                 string selectedValue = dataGridView3.SelectedCells[0].Value.ToString();
-                Process.Start("http://www.google.com/search?q=" + selectedValue);
+                Process.Start($"http://www.google.com/search?q={selectedValue}");
             }
         }
 
